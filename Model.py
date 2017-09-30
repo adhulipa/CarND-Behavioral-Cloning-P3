@@ -2,24 +2,10 @@ import csv
 import cv2
 import numpy as np
 
-CURRENT_DIR = '/home/carnd/projects/P3-CarND-Behavioral-Cloning/'
+from pre_process import read_data
 
-# Read data
-lines = []
-with open(CURRENT_DIR + 'data/driving_log.csv') as csvfile:
-    reader = csv.reader(csvfile)
-    for line in reader:
-        lines.append(line)
-
-images = []
-measurements = []
-for line in lines:
-    source_path = line[0]
-    filename = source_path.split('/')[-1]
-    current_path = CURRENT_DIR + 'data/IMG/' + filename
-    image = cv2.imread(current_path)
-    images.append(image)
-    measurements.append(float(line[3]))
+data_directory = '/home/carnd/projects/P3/DataFromMac/p3-training-data/track1-normal-driving/'
+images, measurements = read_data(data_directory)
 
 # Define inputs to model
 X_train = np.array(images)
